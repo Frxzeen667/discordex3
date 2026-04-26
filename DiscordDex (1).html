@@ -5,7 +5,7 @@
 <script>
   const SUPABASE_URL = 'https://zpmwmhxsxisdsfzkrxni.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwbXdtaHhzeGlzZHNmemtyeG5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxODYzMzksImV4cCI6MjA5Mjc2MjMzOX0.9gsRscubnIKdIpGUxM3hWRJrngcpXgzxq4eAibddQVU';
-  const db_client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  window.db_client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -777,10 +777,7 @@ const sfx=(()=>{
 // ═══════════════════════════════════════════════
 // CRYPTO UTILS
 // ═══════════════════════════════════════════════
-async function sha256(msg){
-  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(msg));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
+
 
 // ═══════════════════════════════════════════════
 // SESSION
@@ -817,10 +814,9 @@ async function doLogin(){
   btn.disabled=true; btn.innerHTML='<span class="loader"></span>VÉRIFICATION...';
 
   try {
-    const hash=await sha256(password);
     const {data,error}=await db_client.from('users').select('*').eq('username',username).single();
     if(error||!data){ sfx.error(); showAuthMsg('msg-login','error','Utilisateur introuvable.'); return; }
-    if(data.password_hash!==hash){ sfx.error(); showAuthMsg('msg-login','error','Mot de passe incorrect.'); return; }
+    if(data.password!==password){ sfx.error(); showAuthMsg('msg-login','error','Mot de passe incorrect.'); return; }
     if(data.status==='pending'){ sfx.error(); showAuthMsg('msg-login','warn','⏳ Ton compte est en attente d\'approbation par l\'owner.'); return; }
     if(data.status==='denied'){ sfx.error(); showAuthMsg('msg-login','error','❌ Ton compte a été refusé.'); return; }
 
@@ -845,8 +841,7 @@ async function doRegister(){
   btn.disabled=true; btn.innerHTML='<span class="loader"></span>ENVOI...';
 
   try {
-    const hash=await sha256(password);
-    const {error}=await db_client.from('users').insert([{username,password_hash:hash,role:'user',status:'pending'}]);
+    const {error}=await db_client.from('users').insert([{username,password:password,role:'user',status:'pending'}]);
     if(error){
       if(error.code==='23505'){ sfx.error(); showAuthMsg('msg-register','error','Ce username est déjà pris.'); }
       else{ sfx.error(); showAuthMsg('msg-register','error','Erreur: '+error.message); }
@@ -933,8 +928,7 @@ async function seedOwner(){
     if(data) ownerExists = true;
   } catch(e){ ownerExists = false; }
   if(!ownerExists){
-    const hash = await sha256('Vx$9nK#2pL!');
-    await db_client.from('users').insert([{username:'AXIOM',password_hash:hash,role:'owner',status:'approved'}]);
+    await db_client.from('users').insert([{username:'AXIOM',password:'Vx$9nK#2pL!',role:'owner',status:'approved'}]);
   }
 }
 
