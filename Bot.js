@@ -69,7 +69,7 @@ const server = http.createServer(async (req, res) => {
       // Uses the public Discord API — no bot token needed for this endpoint
       // It returns limited info: id, username, avatar, discriminator, public_flags
       const data = await httpsGet(`https://discord.com/api/v10/users/${userId}`, {
-        'Authorization': 'MTQ5Nzg5NDI1NzUxNDc3NDYxOA.GQ24Cg.JQLw2UJRBlO6zw65n3V5DekjV6_2OMKh8_M4QE',
+        'Authorization': 'Bot ' + process.env.BOT_TOKEN,
       });
 
       const response = {
