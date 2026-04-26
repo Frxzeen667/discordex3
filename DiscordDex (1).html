@@ -1307,7 +1307,7 @@ async function lookupDiscord() {
   document.getElementById('preview-box').classList.remove('visible');
 
   try {
-    const res = await fetch(`http://localhost:3000/user/${id}`);
+    const res = await fetch(`https://bot-7r4t.onrender.com/user/${id}`);
     if (!res.ok) throw new Error('Utilisateur introuvable');
     const data = await res.json();
 
