@@ -1,2 +1,0 @@
-# discordex3
-Whattt
