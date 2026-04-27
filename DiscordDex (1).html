@@ -845,6 +845,120 @@
   .badge-you     { background:rgba(0,180,255,0.08); border:1px solid rgba(0,180,255,0.25); color:#40c0ff; }
   .badge-entries { background:rgba(192,200,224,0.05); border:1px solid rgba(192,200,224,0.12); color:var(--text-dim); }
 
+  /* ── DISCORD-STYLE EARNED BADGES ── */
+  .earned-badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; align-items:center; }
+
+  .disc-badge {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:4px 10px 4px 7px;
+    border-radius:4px;
+    font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1.5px;
+    font-weight:bold; white-space:nowrap;
+    position:relative; overflow:hidden;
+    transition: transform .2s, box-shadow .2s;
+    cursor:default;
+  }
+  .disc-badge:hover { transform:translateY(-2px); }
+  .disc-badge::before {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: badge-shine 4s ease-in-out infinite;
+  }
+  @keyframes badge-shine {
+    0%,70%,100% { transform:translateX(-100%); }
+    85% { transform:translateX(200%); }
+  }
+  .disc-badge .b-icon { font-size:11px; line-height:1; }
+
+  /* Early Tester — cyan/teal */
+  .dbadge-early {
+    background: rgba(0,212,200,0.1);
+    border: 1px solid rgba(0,212,200,0.35);
+    color: #00d4c8;
+    box-shadow: 0 0 8px rgba(0,212,200,0.15), inset 0 0 12px rgba(0,212,200,0.05);
+    animation: glow-early 3s ease-in-out infinite;
+  }
+  @keyframes glow-early {
+    0%,100% { box-shadow: 0 0 6px rgba(0,212,200,0.15), inset 0 0 8px rgba(0,212,200,0.04); }
+    50%      { box-shadow: 0 0 14px rgba(0,212,200,0.35), inset 0 0 16px rgba(0,212,200,0.08); }
+  }
+
+  /* 2026 — gold/yellow */
+  .dbadge-2026 {
+    background: rgba(255,200,0,0.1);
+    border: 1px solid rgba(255,200,0,0.35);
+    color: #ffc800;
+    box-shadow: 0 0 8px rgba(255,200,0,0.12), inset 0 0 12px rgba(255,200,0,0.04);
+    animation: glow-2026 3.5s ease-in-out infinite;
+  }
+  @keyframes glow-2026 {
+    0%,100% { box-shadow: 0 0 6px rgba(255,200,0,0.1);  }
+    50%      { box-shadow: 0 0 16px rgba(255,200,0,0.3); }
+  }
+
+  /* VIP — purple/violet */
+  .dbadge-vip {
+    background: rgba(160,80,255,0.12);
+    border: 1px solid rgba(160,80,255,0.4);
+    color: #c080ff;
+    box-shadow: 0 0 8px rgba(160,80,255,0.2), inset 0 0 12px rgba(160,80,255,0.06);
+    animation: glow-vip 2.8s ease-in-out infinite;
+  }
+  @keyframes glow-vip {
+    0%,100% { box-shadow: 0 0 8px rgba(160,80,255,0.15); }
+    50%      { box-shadow: 0 0 18px rgba(160,80,255,0.4), 0 0 30px rgba(160,80,255,0.1); }
+  }
+
+  /* AKMS — red/crimson */
+  .dbadge-akms {
+    background: rgba(204,17,34,0.12);
+    border: 1px solid rgba(204,17,34,0.45);
+    color: #ff4455;
+    box-shadow: 0 0 8px rgba(204,17,34,0.2), inset 0 0 12px rgba(204,17,34,0.06);
+    animation: glow-akms 3.2s ease-in-out infinite;
+  }
+  @keyframes glow-akms {
+    0%,100% { box-shadow: 0 0 8px rgba(204,17,34,0.15); }
+    50%      { box-shadow: 0 0 18px rgba(204,17,34,0.4), 0 0 30px rgba(204,17,34,0.1); }
+  }
+
+  /* OG — orange/fire */
+  .dbadge-og {
+    background: rgba(255,100,0,0.1);
+    border: 1px solid rgba(255,120,0,0.4);
+    color: #ff8040;
+    box-shadow: 0 0 8px rgba(255,100,0,0.15), inset 0 0 12px rgba(255,100,0,0.04);
+    animation: glow-og 2.5s ease-in-out infinite;
+  }
+  @keyframes glow-og {
+    0%,100% { box-shadow: 0 0 6px rgba(255,100,0,0.12); }
+    50%      { box-shadow: 0 0 18px rgba(255,100,0,0.35), 0 0 30px rgba(255,100,0,0.1); }
+  }
+
+  /* Badge grant buttons in admin */
+  .badge-grant-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+  .btn-badge-grant {
+    padding:4px 10px; border-radius:3px; font-family:'Share Tech Mono',monospace;
+    font-size:9px; letter-spacing:1px; cursor:none; transition:all .2s; border:none;
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    color:var(--text-dim);
+  }
+  .btn-badge-grant:hover { background:rgba(255,255,255,0.08); color:var(--text); }
+  .btn-badge-grant.active {
+    background:rgba(0,212,200,0.1); border-color:rgba(0,212,200,0.3); color:#00d4c8;
+  }
+  .btn-badge-grant.active-2026 { background:rgba(255,200,0,0.1); border-color:rgba(255,200,0,0.3); color:#ffc800; }
+  .btn-badge-grant.active-vip  { background:rgba(160,80,255,0.1); border-color:rgba(160,80,255,0.3); color:#c080ff; }
+  .btn-badge-grant.active-akms { background:rgba(204,17,34,0.1);  border-color:rgba(204,17,34,0.3);  color:#ff4455; }
+  .btn-badge-grant.active-og   { background:rgba(255,100,0,0.1);  border-color:rgba(255,100,0,0.3);  color:#ff8040; }
+
+  .badge-section-label {
+    font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px;
+    color:var(--text-dim); margin-top:12px; margin-bottom:6px;
+  }
+
   /* ── PINNED SECTION ── */
   .pinned-section { margin-bottom:36px; }
   .pinned-header {
@@ -952,6 +1066,99 @@
     clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
   }
   .btn-export-txt:hover { border-color:rgba(192,200,224,0.5); background:rgba(192,200,224,0.1); box-shadow:var(--glow-silver); color:var(--accent-bright); }
+
+  /* ── SOCIALS TAB ── */
+  .socials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+    padding: 0;
+  }
+  .social-card {
+    background: linear-gradient(160deg, rgba(10,12,20,0.97), rgba(6,8,14,0.99));
+    border: 1px solid rgba(192,200,224,0.09);
+    border-radius: 2px;
+    padding: 22px;
+    position: relative;
+    animation: cardIn .35s ease backwards;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    transition: all .3s;
+    overflow: hidden;
+  }
+  .social-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent2), var(--accent3), var(--accent2), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .social-card:hover { border-color: rgba(204,17,34,0.35); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 20px rgba(204,17,34,0.06); }
+  .social-card:hover::before { opacity: 1; }
+
+  .social-card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .social-card-icon {
+    width: 48px; height: 48px; border-radius: 2px; object-fit: cover;
+    border: 1px solid rgba(204,17,34,0.3); background: rgba(204,17,34,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0; overflow: hidden;
+  }
+  .social-card-icon img { width: 100%; height: 100%; object-fit: cover; }
+  .social-card-info { flex: 1; min-width: 0; }
+  .social-card-platform {
+    font-family: 'Orbitron', monospace; font-size: 10px; letter-spacing: 3px;
+    color: var(--accent3); margin-bottom: 3px;
+  }
+  .social-card-url {
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    color: var(--text-dim); letter-spacing: .5px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .social-card-text {
+    font-family: 'Share Tech Mono', monospace; font-size: 12px;
+    color: var(--text); line-height: 1.6; margin-bottom: 16px;
+    padding: 10px 12px;
+    background: rgba(192,200,224,0.03); border: 1px solid rgba(192,200,224,0.06);
+    border-radius: 1px;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .social-card-text:empty { display: none; }
+  .social-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .social-card-date { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: var(--text-dim); letter-spacing: 1px; }
+  .btn-social-open {
+    padding: 8px 18px; border-radius: 1px;
+    background: linear-gradient(135deg, rgba(204,17,34,0.12), rgba(180,10,25,0.08));
+    border: 1px solid rgba(204,17,34,0.35); color: var(--accent3);
+    font-family: 'Orbitron', monospace; font-size: 8px; letter-spacing: 3px;
+    cursor: none; transition: all .25s;
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+    text-decoration: none; display: inline-block; white-space: nowrap;
+  }
+  .btn-social-open:hover { border-color: var(--accent3); box-shadow: var(--glow-red); color: #fff; }
+  .btn-social-delete {
+    padding: 8px 12px; border-radius: 1px;
+    background: rgba(204,17,34,0.05); border: 1px solid rgba(204,17,34,0.2);
+    color: rgba(204,17,34,0.5); font-family: 'Share Tech Mono', monospace; font-size: 10px;
+    cursor: none; transition: all .2s;
+    clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+  }
+  .btn-social-delete:hover { background: rgba(204,17,34,0.15); color: var(--danger); border-color: rgba(204,17,34,0.5); }
+
+  /* Socials add panel upgrades */
+  .social-platform-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .platform-pill {
+    padding: 6px 14px; border-radius: 1px; cursor: none; transition: all .2s;
+    font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    border: 1px solid var(--border); color: var(--text-dim);
+    background: rgba(0,0,0,0.3);
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  }
+  .platform-pill:hover { border-color: rgba(204,17,34,0.4); color: var(--accent); }
+  .platform-pill.selected { border-color: rgba(204,17,34,0.6); color: var(--accent3); background: rgba(204,17,34,0.1); box-shadow: var(--glow-red); }
+
+  .social-img-preview {
+    width: 48px; height: 48px; border-radius: 2px; object-fit: cover;
+    border: 1px solid rgba(204,17,34,0.3); display: none;
+    margin-top: 8px;
+  }
+  .social-img-preview.visible { display: block; }
 
 </style>
 </head>
@@ -1073,6 +1280,7 @@
     <nav>
       <button class="nav-btn active" id="nav-pokedex" onclick="switchView('pokedex')">POKÉDEX</button>
       <button class="nav-btn" id="nav-people" onclick="switchView('people')">MEMBRES</button>
+      <button class="nav-btn" id="nav-socials" onclick="switchView('socials')">SOCIALS</button>
       <button class="nav-btn" id="nav-add" onclick="switchView('add')" style="display:none;">+ AJOUTER</button>
       <button class="nav-btn danger-nav" id="nav-admin" onclick="switchView('admin')" style="display:none;">
         ADMIN <span id="pending-dot" class="pending-dot" style="display:none;"></span>
@@ -1122,6 +1330,65 @@
       <div class="count-badge">MEMBRES: <span id="people-count">0</span></div>
     </div>
     <div class="people-grid" id="people-grid"></div>
+  </div>
+
+  <!-- SOCIALS -->
+  <div class="view" id="view-socials">
+    <div class="section-title">RÉSEAUX SOCIAUX</div>
+
+    <!-- Owner add panel -->
+    <div id="socials-add-panel" style="display:none; max-width:640px; margin:0 auto 40px;">
+      <div class="form-card">
+        <div class="form-section-title" style="margin-top:0;">AJOUTER UN LIEN</div>
+
+        <!-- Platform quick-select -->
+        <div class="input-group">
+          <label class="input-label">PLATEFORME (sélection rapide)</label>
+          <div class="social-platform-pills">
+            <button class="platform-pill" onclick="selectPlatform('discord')" id="pill-discord">🎮 DISCORD</button>
+            <button class="platform-pill" onclick="selectPlatform('guns')"    id="pill-guns">🔫 GUNS.LOL</button>
+            <button class="platform-pill" onclick="selectPlatform('custom')"  id="pill-custom">🔗 CUSTOM</button>
+          </div>
+        </div>
+
+        <!-- URL -->
+        <div class="input-group">
+          <label class="input-label">URL DU LIEN</label>
+          <input type="text" class="form-input" id="social-url"
+            placeholder="https://discord.gg/... ou https://guns.lol/... ou autre URL"
+            oninput="onSocialUrlChange(this.value)">
+        </div>
+
+        <!-- Custom image URL -->
+        <div class="input-group">
+          <label class="input-label">IMAGE PERSONNALISÉE (URL d'une image, optionnel)</label>
+          <input type="text" class="form-input" id="social-img-url"
+            placeholder="https://i.imgur.com/... ou n'importe quelle URL d'image"
+            oninput="previewSocialImg(this.value)">
+          <img id="social-img-preview" class="social-img-preview" src="" alt="preview">
+        </div>
+
+        <!-- Text / description -->
+        <div class="input-group">
+          <label class="input-label">TEXTE / DESCRIPTION</label>
+          <textarea class="form-input" id="social-msg"
+            placeholder="Rejoins notre Discord, check mon guns.lol, ou autre message..."
+            maxlength="300" rows="3" style="resize:vertical;"></textarea>
+        </div>
+
+        <div class="msg" id="msg-social"></div>
+        <button class="btn-submit" id="btn-add-social" onclick="addSocial()" style="margin-top:18px;">◆ &nbsp;AJOUTER LE LIEN</button>
+      </div>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="socials-grid" id="socials-grid">
+      <div class="empty-state" id="socials-empty" style="opacity:.35; grid-column:1/-1;">
+        <span class="empty-icon">🔗</span>
+        <div class="empty-title">AUCUN LIEN</div>
+        <div class="empty-sub">Les owners peuvent ajouter des liens sociaux</div>
+      </div>
+    </div>
   </div>
 
   <!-- ADD -->
@@ -1273,6 +1540,52 @@
   <div class="ctx-sep"></div>
   <div class="ctx-section-label">DANGER</div>
   <button class="ctx-item danger" onclick="ctxDeleteEntry()"><span class="ctx-icon">🗑</span> SUPPRIMER LE DOSSIER</button>
+</div>
+
+<!-- DISCORD JOIN MODAL -->
+<div id="discord-join-modal" style="
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(1,1,3,0.92);backdrop-filter:blur(16px);
+  display:none;align-items:center;justify-content:center;
+">
+  <div style="
+    background:linear-gradient(160deg,rgba(12,14,22,0.99),rgba(6,7,12,0.99));
+    border:1px solid rgba(88,101,242,0.4);
+    border-radius:4px;padding:48px 44px;width:100%;max-width:440px;
+    position:relative;animation:modalIn .5s cubic-bezier(0.16,1,0.3,1);
+    clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+    text-align:center;
+  ">
+    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 5%,#5865f2 30%,#7289da 50%,#5865f2 70%,transparent 95%);box-shadow:0 0 20px rgba(88,101,242,0.6);"></div>
+    <div style="font-size:48px;margin-bottom:16px;">🎮</div>
+    <div style="font-family:'Orbitron',monospace;font-size:16px;font-weight:900;letter-spacing:4px;color:#7289da;margin-bottom:8px;text-shadow:0 0 20px rgba(88,101,242,0.6);">REJOINS LE SERVEUR</div>
+    <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(192,200,224,0.5);letter-spacing:2px;margin-bottom:28px;">COMMUNAUTÉ OFFICIELLE POKÉDEX</div>
+    <div style="font-family:'Rajdhani',sans-serif;font-size:15px;color:var(--text);margin-bottom:32px;line-height:1.6;">
+      Rejoins notre serveur Discord pour rester connecté avec la communauté, recevoir les mises à jour et participer aux discussions.
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <button id="discord-join-btn" onclick="discordJoin()" style="
+        padding:14px 32px;
+        background:linear-gradient(135deg,rgba(88,101,242,0.25),rgba(114,137,218,0.15));
+        border:1px solid rgba(88,101,242,0.6);border-radius:2px;
+        color:#7289da;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;
+        cursor:pointer;transition:all .3s;
+        clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+      " onmouseover="this.style.boxShadow='0 0 20px rgba(88,101,242,0.5)';this.style.color='#fff';" onmouseout="this.style.boxShadow='none';this.style.color='#7289da';">
+        REJOINDRE
+      </button>
+      <button onclick="discordSkip()" style="
+        padding:14px 32px;
+        background:rgba(26,31,46,0.6);
+        border:1px solid rgba(192,200,224,0.1);border-radius:2px;
+        color:var(--text-dim);font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;
+        cursor:pointer;transition:all .3s;
+        clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+      " onmouseover="this.style.color='var(--text)';this.style.borderColor='rgba(192,200,224,0.25)';" onmouseout="this.style.color='var(--text-dim)';this.style.borderColor='rgba(192,200,224,0.1)';">
+        SKIP
+      </button>
+    </div>
+  </div>
 </div>
 
 <!-- PERMISSIONS MODAL -->
@@ -1628,11 +1941,12 @@ async function loadApp(){
     db_users=users||[]; updatePendingBadge();
     await loadProposals();
   } else {
-    const {data:users}=await db_client.from('users').select('id,username,role,status,created_at').order('created_at',{ascending:true});
+    const {data:users}=await db_client.from('users').select('id,username,role,status,created_at,badges').order('created_at',{ascending:true});
     db_users=users||[];
   }
   renderGrid(); updateStats();
   await loadAnnounces();
+  await loadSocials();
   // Start realtime sync
   startRealtime();
 }
@@ -1671,6 +1985,7 @@ function switchView(view){
   if(view==='pokedex') renderGrid();
   if(view==='admin') renderAdminPanel();
   if(view==='people') renderPeopleGrid();
+  if(view==='socials') renderSocials();
 }
 
 // ═══════════════════════════════════════════════
@@ -1736,6 +2051,8 @@ function renderUsersGrid(){
     const canDemoteAdmin = (isOwner||isCoOwner) && u.role==='admin';
     const canDemoteCoOwner = isOwner && u.role==='co-owner';
     const roleLabel = u.role==='co-owner'?'CO-OWNER':u.role.toUpperCase();
+    const canGrantBadges = (isOwner || isCoOwner) && u.status === 'approved';
+    const userBadges = u.badges || [];
     card.innerHTML=`
       <div class="user-card-header">
         <div><div class="user-card-name">${escapeHtml(u.username)}</div><div class="user-card-date">Inscrit le ${new Date(u.created_at).toLocaleDateString('fr-FR')}</div></div>
@@ -1751,15 +2068,67 @@ function renderUsersGrid(){
         ${canMakeCoOwner?`<button class="btn-promote" data-action="promote-coowner" style="background:rgba(255,140,0,0.1);border-color:rgba(255,140,0,0.3);color:#ffaa00;">★ CO-OWNER</button>`:''}
         ${canDemoteAdmin?`<button class="btn-demote" data-action="demote-user">⬇ USER</button>`:''}
         ${canDemoteCoOwner?`<button class="btn-demote" data-action="demote-admin">⬇ ADMIN</button>`:''}
-      </div>`;
+      </div>
+      ${canGrantBadges ? `
+      <div class="badge-section-label">BADGES</div>
+      <div class="badge-grant-row">
+        ${BADGE_DEFS.map(b=>{
+          const has=userBadges.includes(b.id);
+          return `<button class="btn-badge-grant ${has?'active-'+b.id:''}" data-badge="${b.id}" title="${has?'Retirer':'Donner'} ${b.label}">${b.icon} ${b.label} ${has?'✕':''}</button>`;
+        }).join('')}
+      </div>
+      ` : ''}
+    `;
     card.querySelector('[data-action="approve"]')?.addEventListener('click',()=>{ sfx.accept(); updateUserStatus(u.id,'approved'); });
     card.querySelector('[data-action="deny"]')?.addEventListener('click',()=>{ sfx.deny(); updateUserStatus(u.id,'denied'); });
     card.querySelector('[data-action="promote-admin"]')?.addEventListener('click',()=>{ sfx.save(); updateUserRole(u.id,'admin'); });
     card.querySelector('[data-action="promote-coowner"]')?.addEventListener('click',()=>{ sfx.save(); updateUserRole(u.id,'co-owner'); });
     card.querySelector('[data-action="demote-user"]')?.addEventListener('click',()=>{ sfx.nav(); updateUserRole(u.id,'user'); });
     card.querySelector('[data-action="demote-admin"]')?.addEventListener('click',()=>{ sfx.nav(); updateUserRole(u.id,'admin'); });
+    // Badge toggles
+    card.querySelectorAll('[data-badge]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sfx.save();
+        const badgeId = btn.getAttribute('data-badge');
+        toggleUserBadge(u.id, badgeId);
+      });
+    });
     grid.appendChild(card);
   });
+}
+
+// ═══════════════════════════════════════════════
+// BADGE SYSTEM
+// ═══════════════════════════════════════════════
+const BADGE_DEFS = [
+  { id:'early',  label:'EARLY TESTER', icon:'🧪', css:'dbadge-early' },
+  { id:'2026',   label:'2026',         icon:'📅', css:'dbadge-2026'  },
+  { id:'vip',    label:'VIP',          icon:'👑', css:'dbadge-vip'   },
+  { id:'akms',   label:'AKMS',         icon:'⚔️', css:'dbadge-akms'  },
+  { id:'og',     label:'OG',           icon:'🔥', css:'dbadge-og'    },
+];
+
+function renderEarnedBadges(badges){
+  if(!badges||!badges.length) return '';
+  return badges.map(bid=>{
+    const def=BADGE_DEFS.find(b=>b.id===bid);
+    if(!def) return '';
+    return `<span class="disc-badge ${def.css}" title="${def.label}"><span class="b-icon">${def.icon}</span>${def.label}</span>`;
+  }).join('');
+}
+
+async function toggleUserBadge(userId, badgeId){
+  const user = db_users.find(u=>u.id===userId);
+  if(!user) return;
+  const current = user.badges || [];
+  const newBadges = current.includes(badgeId)
+    ? current.filter(b=>b!==badgeId)
+    : [...current, badgeId];
+  const {error} = await db_client.from('users').update({badges: newBadges}).eq('id', userId);
+  if(error){ sfx.error(); alert('Erreur badge: '+error.message); return; }
+  user.badges = newBadges;
+  renderAdminPanel();
+  renderPeopleGrid();
 }
 
 async function updateUserStatus(userId, status){
@@ -1840,6 +2209,7 @@ function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300
 
 function buildCard(entry, i, isPinned){
   const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
+  const canPin=session&&(session.role==='owner'||session.role==='co-owner');
   const card=document.createElement('div');
   card.className='dossier-card'+(isPinned?' pinned':'');
   card.style.animationDelay=(i*.05)+'s';
@@ -1848,7 +2218,7 @@ function buildCard(entry, i, isPinned){
   if(entry.ville) fields.push({label:'VILLE',value:entry.ville});
   if(entry.ddn) fields.push({label:'NAISSANCE',value:formatDate(entry.ddn)});
   if(entry.email) fields.push({label:'EMAIL',value:entry.email});
-  const pinBtn = isPriv
+  const pinBtn = canPin
     ? (isPinned
         ? `<button class="btn-unpin">📌 DÉSÉPINGLER</button>`
         : `<button class="btn-pin">📌 ÉPINGLER</button>`)
@@ -1879,9 +2249,11 @@ function buildCard(entry, i, isPinned){
     </div>
   `;
   card.querySelector('.btn-view').addEventListener('click',e=>{ e.stopPropagation(); sfx.open(); openModal(entry.discord_id); });
+  if(canPin){
+    if(isPinned) card.querySelector('.btn-unpin')?.addEventListener('click',e=>{ e.stopPropagation(); togglePin(entry.discord_id,false); });
+    else card.querySelector('.btn-pin')?.addEventListener('click',e=>{ e.stopPropagation(); togglePin(entry.discord_id,true); });
+  }
   if(isPriv){
-    if(isPinned) card.querySelector('.btn-unpin').addEventListener('click',e=>{ e.stopPropagation(); togglePin(entry.discord_id,false); });
-    else card.querySelector('.btn-pin').addEventListener('click',e=>{ e.stopPropagation(); togglePin(entry.discord_id,true); });
     card.querySelector('.btn-delete').addEventListener('click',e=>{ e.stopPropagation(); sfx.error(); deleteEntry(entry.discord_id); });
     card.addEventListener('contextmenu',e=>{ e.preventDefault(); openCtxMenu(e,entry); });
   }
@@ -2061,6 +2433,7 @@ function renderPeopleGrid(filter=''){
     if(u.status==='approved') badges.push(`<span class="badge badge-approved">✓ ACTIF</span>`);
     else if(u.status==='pending') badges.push(`<span class="badge badge-pending">⏳ ATTENTE</span>`);
     else if(u.status==='denied') badges.push(`<span class="badge badge-denied">✕ REFUSÉ</span>`);
+    const earnedBadges = renderEarnedBadges(u.badges||[]);
     card.innerHTML=`
       <div class="people-card-header">
         <div>
@@ -2069,6 +2442,7 @@ function renderPeopleGrid(filter=''){
         </div>
       </div>
       <div class="people-badges">${badges.join('')}</div>
+      ${earnedBadges ? `<div class="earned-badges">${earnedBadges}</div>` : ''}
     `;
     grid.appendChild(card);
   });
@@ -2292,6 +2666,183 @@ function renderProposalsAdmin(){
 }
 
 // ═══════════════════════════════════════════════
+// SOCIALS
+// ═══════════════════════════════════════════════
+let db_socials = [];
+let selectedPlatform = 'custom';
+
+const PLATFORM_META = {
+  discord: { label: 'DISCORD',  emoji: '🎮', color: '#5865F2', defaultImg: '' },
+  guns:    { label: 'GUNS.LOL', emoji: '🔫', color: '#cc1122', defaultImg: '' },
+  custom:  { label: 'CUSTOM',   emoji: '🔗', color: '#c0c8e0', defaultImg: '' },
+};
+
+function detectPlatform(url) {
+  if (!url) return 'custom';
+  if (/discord\.gg|discord\.com\/invite/i.test(url)) return 'discord';
+  if (/guns\.lol/i.test(url)) return 'guns';
+  return 'custom';
+}
+
+function selectPlatform(p) {
+  selectedPlatform = p;
+  document.querySelectorAll('.platform-pill').forEach(el => el.classList.remove('selected'));
+  const pill = document.getElementById('pill-' + p);
+  if (pill) pill.classList.add('selected');
+  sfx.type();
+}
+
+function onSocialUrlChange(val) {
+  const auto = detectPlatform(val);
+  selectPlatform(auto);
+}
+
+function previewSocialImg(url) {
+  const preview = document.getElementById('social-img-preview');
+  if (!preview) return;
+  if (url && url.startsWith('http')) {
+    preview.src = url;
+    preview.classList.add('visible');
+    preview.onerror = () => preview.classList.remove('visible');
+  } else {
+    preview.src = '';
+    preview.classList.remove('visible');
+  }
+}
+
+async function loadSocials() {
+  try {
+    const { data, error } = await db_client.from('socials').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    db_socials = data || [];
+  } catch(e) {
+    db_socials = [];
+  }
+}
+
+function renderSocials() {
+  const isOwner = session && (session.role === 'owner' || session.role === 'co-owner');
+  const panel = document.getElementById('socials-add-panel');
+  if (panel) panel.style.display = isOwner ? '' : 'none';
+
+  loadSocials().then(() => {
+    const grid = document.getElementById('socials-grid');
+    if (!grid) return;
+
+    if (!db_socials.length) {
+      grid.innerHTML = `<div class="empty-state" id="socials-empty" style="opacity:.35; grid-column:1/-1;">
+        <span class="empty-icon">🔗</span>
+        <div class="empty-title">AUCUN LIEN</div>
+        <div class="empty-sub">Les owners peuvent ajouter des liens sociaux</div>
+      </div>`;
+      return;
+    }
+
+    grid.innerHTML = '';
+    db_socials.forEach((s, i) => {
+      const meta = PLATFORM_META[s.platform] || PLATFORM_META.custom;
+      const card = document.createElement('div');
+      card.className = 'social-card';
+      card.style.animationDelay = (i * 0.07) + 's';
+
+      // Icon: custom image or emoji
+      let iconHtml;
+      if (s.img_url) {
+        iconHtml = `<div class="social-card-icon"><img src="${escapeHtml(s.img_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${meta.emoji}'"></div>`;
+      } else {
+        iconHtml = `<div class="social-card-icon" style="font-size:22px;">${meta.emoji}</div>`;
+      }
+
+      const textHtml = s.text ? `<div class="social-card-text">${escapeHtml(s.text)}</div>` : '';
+      const dateStr = new Date(s.created_at).toLocaleDateString('fr-FR');
+      const deleteBtn = isOwner
+        ? `<button class="btn-social-delete" onclick="deleteSocial('${escapeHtml(s.id)}')">🗑</button>`
+        : '';
+
+      card.innerHTML = `
+        <div class="social-card-top">
+          ${iconHtml}
+          <div class="social-card-info">
+            <div class="social-card-platform">${meta.emoji} ${meta.label}</div>
+            <div class="social-card-url">${escapeHtml(s.url)}</div>
+          </div>
+        </div>
+        ${textHtml}
+        <div class="social-card-footer">
+          <div class="social-card-date">${dateStr}</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            ${deleteBtn}
+            <a class="btn-social-open" href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer">◆ OUVRIR</a>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  });
+}
+
+async function addSocial() {
+  const url     = (document.getElementById('social-url')?.value || '').trim();
+  const imgUrl  = (document.getElementById('social-img-url')?.value || '').trim();
+  const text    = (document.getElementById('social-msg')?.value || '').trim();
+  const msgEl   = document.getElementById('msg-social');
+
+  const showMsg = (type, txt) => {
+    if (!msgEl) return;
+    msgEl.className = 'msg ' + type + ' visible';
+    msgEl.textContent = txt;
+    setTimeout(() => { msgEl.className = 'msg'; }, 3500);
+  };
+
+  if (!url) { sfx.error(); showMsg('error', 'URL requise.'); return; }
+  if (!/^https?:\/\//i.test(url)) { sfx.error(); showMsg('error', 'URL invalide (doit commencer par https://).'); return; }
+
+  const platform = detectPlatform(url) !== 'custom' ? detectPlatform(url) : selectedPlatform;
+
+  const btn = document.getElementById('btn-add-social');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loader"></span>AJOUT...';
+
+  try {
+    const payload = { url, platform, img_url: imgUrl || null, text: text || null };
+    const { error } = await db_client.from('socials').insert([payload]);
+    if (error) throw error;
+
+    sfx.save();
+    showMsg('success', '✓ Lien ajouté !');
+    document.getElementById('social-url').value = '';
+    document.getElementById('social-img-url').value = '';
+    document.getElementById('social-msg').value = '';
+    document.getElementById('social-img-preview').classList.remove('visible');
+    selectPlatform('custom');
+    renderSocials();
+  } catch(e) {
+    sfx.error();
+    // If table doesn't exist, give a clear hint
+    const hint = e.message && e.message.includes('does not exist')
+      ? 'Table "socials" introuvable — crée-la dans Supabase (voir console).'
+      : 'Erreur: ' + e.message;
+    showMsg('error', hint);
+    console.error('[socials] addSocial error:', e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '◆  AJOUTER LE LIEN';
+  }
+}
+
+async function deleteSocial(id) {
+  if (!confirm('Supprimer ce lien ?')) return;
+  try {
+    const { error } = await db_client.from('socials').delete().eq('id', id);
+    if (error) throw error;
+    sfx.error();
+    renderSocials();
+  } catch(e) {
+    sfx.error();
+    alert('Erreur: ' + e.message);
+  }
+}
+
+// ═══════════════════════════════════════════════
 // BADGE CONFIG
 // ═══════════════════════════════════════════════
 const cbadgeIcons = { vip:'👑', danger:'⚠️', trusted:'✓', hacker:'◈', bot:'◆' };
@@ -2465,6 +3016,32 @@ function showToast(msg){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(()=>t.remove(),400); },3500);
 }
+
+// ═══════════════════════════════════════════════
+// DISCORD JOIN MODAL
+// ═══════════════════════════════════════════════
+function showDiscordModal(){
+  const modal=document.getElementById('discord-join-modal');
+  modal.style.display='flex';
+}
+function discordJoin(){
+  // Open Discord link
+  window.open('https://discord.gg/mfwpyZtgN3','_blank');
+  // Mark as joined in localStorage so it never shows again for this user
+  localStorage.setItem('discord_joined','1');
+  document.getElementById('discord-join-modal').style.display='none';
+}
+function discordSkip(){
+  // Just close — will show again next time (no localStorage set)
+  document.getElementById('discord-join-modal').style.display='none';
+}
+// Show modal every page load UNLESS the user already clicked Rejoindre
+window.addEventListener('load', ()=>{
+  if(!localStorage.getItem('discord_joined')){
+    // Small delay so loading screen finishes first
+    setTimeout(showDiscordModal, 2600);
+  }
+});
 
 initApp();
 </script>
