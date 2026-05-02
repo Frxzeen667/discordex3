@@ -2273,19 +2273,44 @@ function cancelChatImg(){
 }
 function autoResizeChat(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
 function chatKeydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}}
-async function sendChatMessage(){
-  const input=document.getElementById('chat-input');
-  const text=input.value.trim();
-  const imgUrl=pendingChatImg;
-  if(!text&&!imgUrl){sfx.error();return;}
-  const btn=document.getElementById('btn-chat-send');btn.disabled=true;
-  try{
-    const {data,error}=await db_client.from('chat_messages').insert([{author:session.username,text:text||null,img_url:imgUrl||null}]).select().single();
-    if(error)throw error;
-    input.value='';input.style.height='auto';cancelChatImg();
-    if(!db_chat.find(m=>m.id===data.id)){db_chat.push(data);renderChatMessages();}
-  }catch(e){sfx.error();showToast('⚠ Chat error: '+e.message);}
-  btn.disabled=false;
+let lastMessageTime = 0;
+const CHAT_COOLDOWN = 3000; // 3 secondes
+
+async function sendChatMessage() {
+  const now = Date.now();
+  if (now - lastMessageTime < CHAT_COOLDOWN) {
+    const remaining = ((CHAT_COOLDOWN - (now - lastMessageTime)) / 1000).toFixed(1);
+    showToast(`⏳ Attends encore ${remaining}s...`);
+    sfx.error();
+    return;
+  }
+
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  const imgUrl = pendingChatImg;
+  if (!text && !imgUrl) { sfx.error(); return; }
+
+  const btn = document.getElementById('btn-chat-send');
+  btn.disabled = true;
+
+  try {
+    const { data, error } = await db_client.from('chat_messages')
+      .insert([{ author: session.username, text: text || null, img_url: imgUrl || null }])
+      .select().single();
+    if (error) throw error;
+
+    lastMessageTime = Date.now(); // update après envoi réussi
+
+    input.value = ''; input.style.height = 'auto'; cancelChatImg();
+    if (!db_chat.find(m => m.id === data.id)) {
+      db_chat.push(data);
+      renderChatMessages();
+    }
+  } catch(e) {
+    sfx.error();
+    showToast('⚠ Chat error: ' + e.message);
+  }
+  btn.disabled = false;
 }
 async function deleteChatMsg(id){
   const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
