@@ -207,8 +207,9 @@
   .stat-item span { color:var(--accent-bright); font-weight:bold; }
 
   /* ── VIEWS ── */
-  .view { display:none; padding:40px; animation:fadeIn .4s ease; }
-  .view.active { display:block; }
+.view { display:none; padding:40px; animation:fadeIn .4s ease; }
+.view.active { display:block; }
+#view-chat.active { display:flex; padding:0; }
   @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
 
   .section-title { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:5px; color:var(--text-dim); margin-bottom:30px; display:flex; align-items:center; gap:14px; }
@@ -245,13 +246,99 @@
   .card-field { display:flex; justify-content:space-between; align-items:center; font-size:11px; }
   .field-label { font-family:'Share Tech Mono',monospace; color:var(--text-dim); letter-spacing:1px; font-size:9px; }
   .field-value { color:var(--text); font-weight:600; max-width:60%; text-align:right; word-break:break-word; font-size:12px; }
-  .card-actions { display:flex; gap:8px; margin-top:14px; }
+  .card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 14px;
+}
 
-  .btn-view, .btn-delete { flex:1; padding:8px; border-radius:1px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; cursor:none; transition:all .2s; border:none; clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%); }
-  .btn-view { background:rgba(192,200,224,0.06); border:1px solid rgba(192,200,224,0.15); color:var(--accent); }
-  .btn-view:hover { background:rgba(192,200,224,0.12); box-shadow:var(--glow-silver); color:var(--accent-bright); }
-  .btn-delete { background:rgba(204,17,34,0.06); border:1px solid rgba(204,17,34,0.2); color:var(--accent2); }
-  .btn-delete:hover { background:rgba(204,17,34,0.12); box-shadow:var(--glow-red); color:var(--accent3); }
+.btn-view {
+  grid-column: 1 / -1; /* prend toute la largeur */
+  padding: 8px;
+  border-radius: 1px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  cursor: none;
+  transition: all .2s;
+  border: none;
+  clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+  background: rgba(192, 200, 224, 0.06);
+  border: 1px solid rgba(192, 200, 224, 0.15);
+  color: var(--accent);
+}
+.btn-view:hover {
+  background: rgba(192, 200, 224, 0.12);
+  box-shadow: var(--glow-silver);
+  color: var(--accent-bright);
+}
+
+.btn-edit {
+  padding: 8px;
+  border-radius: 1px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  cursor: none;
+  transition: all .2s;
+  border: none;
+  clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+  background: rgba(102, 51, 204, 0.06);
+  border: 1px solid rgba(102, 51, 204, 0.2);
+  color: rgba(180, 140, 255, 0.8);
+}
+.btn-edit:hover {
+  background: rgba(102, 51, 204, 0.14);
+  box-shadow: 0 0 12px rgba(102, 51, 204, 0.25);
+  color: #c090ff;
+}
+
+.btn-pin, .btn-unpin {
+  padding: 8px;
+  border-radius: 1px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  cursor: none;
+  transition: all .2s;
+  clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+}
+.btn-pin {
+  background: rgba(245, 158, 11, 0.07);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: var(--warn);
+}
+.btn-pin:hover {
+  background: rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+}
+.btn-unpin {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: var(--warn);
+}
+.btn-unpin:hover { background: rgba(245, 158, 11, 0.22); }
+
+.btn-delete {
+  padding: 8px;
+  border-radius: 1px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  cursor: none;
+  transition: all .2s;
+  border: none;
+  clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+  background: rgba(204, 17, 34, 0.06);
+  border: 1px solid rgba(204, 17, 34, 0.2);
+  color: var(--accent2);
+}
+.btn-delete:hover {
+  background: rgba(204, 17, 34, 0.12);
+  box-shadow: var(--glow-red);
+  color: var(--accent3);
+}
 
   .empty-state { text-align:center; padding:100px 40px; opacity:.35; }
   .empty-icon { font-size:56px; margin-bottom:20px; display:block; }
@@ -655,8 +742,8 @@
   /* ════════════════════════════════════════
      ── REAL-TIME CHAT ──
   ════════════════════════════════════════ */
-  #view-chat { padding:0; display:flex; flex-direction:column; height:calc(100vh - 100px); }
-  #view-chat.active { display:flex; }
+#view-chat { display:none; }
+#view-chat.active { padding:0; display:flex; flex-direction:column; height:calc(100vh - 100px); }
 
   .chat-container { display:flex; flex-direction:column; height:100%; }
   .chat-header-bar { padding:16px 32px; border-bottom:1px solid rgba(74,158,255,0.12); background:linear-gradient(180deg,rgba(1,1,3,0.98),rgba(4,6,14,0.95)); display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
@@ -1416,7 +1503,7 @@ function switchView(view){
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('view-'+view).classList.add('active');
   document.getElementById('nav-'+view).classList.add('active');
-  // Refresh data on each tab switch so content is always up-to-date
+
   if(view==='pokedex')  { refreshEntries(); }
   if(view==='admin')    { refreshUsers().then(()=>renderAdminPanel()); }
   if(view==='people')   { refreshUsers().then(()=>renderPeopleGrid()); }
@@ -1424,13 +1511,6 @@ function switchView(view){
   if(view==='hall')     { loadHall().then(()=>renderHall()); }
   if(view==='chat')     { loadChatMessages(); scrollChatToBottom(); }
 }
-
-async function refreshEntries(){
-  const {data}=await db_client.from('entries').select('*').order('created_at',{ascending:false});
-  db_entries=data||[];
-  updateStats(); renderGrid();
-}
-
 async function refreshUsers(){
   const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
   if(isPriv){
@@ -1580,51 +1660,171 @@ function resetForm(){['input-prenom','input-nom','input-ddn','input-ville','inpu
 // ═══════════════════════════════════════════════
 // RENDER GRID
 // ═══════════════════════════════════════════════
-function norm(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').trim();}
+function norm(s){
+  return (s||'')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9\s]/g,'')
+    .trim();
+}
 
 function buildCard(entry,i,isPinned){
-  const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
-  const canPin=session&&(session.role==='owner'||session.role==='co-owner');
-  const card=document.createElement('div');
-  card.className='dossier-card'+(isPinned?' pinned':'');
-  card.style.animationDelay=(i*.05)+'s';
-  const fields=[];
-  if(entry.nom||entry.prenom)fields.push({label:'IDENTITÉ',value:[entry.prenom,entry.nom].filter(Boolean).join(' ')});
-  if(entry.ville)fields.push({label:'VILLE',value:entry.ville});
-  if(entry.ddn)fields.push({label:'NAISSANCE',value:formatDate(entry.ddn)});
-  if(entry.email)fields.push({label:'EMAIL',value:entry.email});
-  const pinBtn=canPin?(isPinned?`<button class="btn-unpin">📌 DÉSÉPINGLER</button>`:`<button class="btn-pin">📌 ÉPINGLER</button>`):'';
-  const entryBadges=(entry.badges||'').split(',').map(b=>b.trim()).filter(Boolean);
-  const badgeHtml=entryBadges.length?`<div class="card-badges">${entryBadges.map(b=>`<span class="cbadge cbadge-${b}">${cbadgeIcons[b]||'◆'} ${b.toUpperCase()}</span>`).join('')}</div>`:'';
-  card.innerHTML=`
+  const isPriv = session && (
+    session.role==='owner' ||
+    session.role==='co-owner' ||
+    session.role==='admin'
+  );
+
+  const canPin = session && (
+    session.role==='owner' ||
+    session.role==='co-owner'
+  );
+
+  const card = document.createElement('div');
+  card.className = 'dossier-card' + (isPinned ? ' pinned' : '');
+  card.style.animationDelay = (i * .05) + 's';
+
+  const fields = [];
+  if(entry.nom || entry.prenom){
+    fields.push({
+      label:'IDENTITÉ',
+      value:[entry.prenom,entry.nom].filter(Boolean).join(' ')
+    });
+  }
+  if(entry.ville) fields.push({label:'VILLE',value:entry.ville});
+  if(entry.ddn)   fields.push({label:'NAISSANCE',value:formatDate(entry.ddn)});
+  if(entry.email) fields.push({label:'EMAIL',value:entry.email});
+
+  const pinBtn = canPin
+    ? (isPinned
+        ? `<button class="btn-unpin">📌 DÉSÉPINGLER</button>`
+        : `<button class="btn-pin">📌 ÉPINGLER</button>`)
+    : '';
+
+  const editBtn = isPriv
+    ? `<button class="btn-edit">MODIFIER</button>`
+    : '';
+
+  const entryBadges = (entry.badges||'')
+    .split(',')
+    .map(b=>b.trim())
+    .filter(Boolean);
+
+  const badgeHtml = entryBadges.length
+    ? `<div class="card-badges">
+        ${entryBadges.map(b=>
+          `<span class="cbadge cbadge-${b}">
+            ${cbadgeIcons[b]||'◆'} ${b.toUpperCase()}
+          </span>`
+        ).join('')}
+      </div>`
+    : '';
+
+  card.innerHTML = `
     <div class="card-scan"></div>
-    ${isPinned?'<div class="pin-badge">📌 ÉPINGLÉ</div>':''}
-    <div class="card-id-badge">#${String(i+1).padStart(3,'0')}</div>
+
+    ${isPinned ? '<div class="pin-badge">📌 ÉPINGLÉ</div>' : ''}
+
+    <div class="card-id-badge">
+      #${String(i+1).padStart(3,'0')}
+    </div>
+
     <div class="card-header">
       <div class="avatar-wrapper">
-        <img class="card-avatar" src="${entry.avatar||''}" alt="${escapeHtml(entry.username)}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23111%22/><text x=%2250%22 y=%2262%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22%23cc1122%22>?</text></svg>'">
+        <img class="card-avatar"
+          src="${entry.avatar||''}"
+          alt="${escapeHtml(entry.username)}"
+          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23111%22/><text x=%2250%22 y=%2262%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22%23cc1122%22>?</text></svg>'">
         <div class="avatar-ring"></div>
       </div>
+
       <div class="card-info">
-        <div class="card-username">${escapeHtml(entry.username)}</div>
-        <div class="card-discord-id">${entry.discord_id}</div>
+        <div class="card-username">
+          ${escapeHtml(entry.username)}
+        </div>
+        <div class="card-discord-id">
+          ${entry.discord_id}
+        </div>
       </div>
     </div>
+
     ${badgeHtml}
-    ${fields.length?`<div class="card-divider"></div><div class="card-fields">${fields.map(f=>`<div class="card-field"><span class="field-label">${f.label}</span><span class="field-value">${escapeHtml(f.value)}</span></div>`).join('')}</div>`:''}
+
+    ${fields.length ? `
+      <div class="card-divider"></div>
+
+      <div class="card-fields">
+        ${fields.map(f=>`
+          <div class="card-field">
+            <span class="field-label">${f.label}</span>
+            <span class="field-value">${escapeHtml(f.value)}</span>
+          </div>
+        `).join('')}
+      </div>
+    ` : ''}
+
     <div class="card-actions">
       <button class="btn-view">DOSSIER COMPLET</button>
+      ${editBtn}
       ${pinBtn}
-      ${isPriv?'<button class="btn-delete">SUPPRIMER</button>':''}
+      ${isPriv ? '<button class="btn-delete">SUPPRIMER</button>' : ''}
     </div>
   `;
-  card.querySelector('.btn-view').addEventListener('click',e=>{e.stopPropagation();sfx.open();openModal(entry.discord_id);});
+
+  // ═══════════════════════════════════════════════
+  // EVENTS
+  // ═══════════════════════════════════════════════
+
+  // VIEW
+  card.querySelector('.btn-view').addEventListener('click',e=>{
+    e.stopPropagation();
+    sfx.open();
+    openModal(entry.discord_id);
+  });
+
+  // PIN
   if(canPin){
-    if(isPinned)card.querySelector('.btn-unpin')?.addEventListener('click',e=>{e.stopPropagation();togglePin(entry.discord_id,false);});
-    else card.querySelector('.btn-pin')?.addEventListener('click',e=>{e.stopPropagation();togglePin(entry.discord_id,true);});
+    if(isPinned){
+      card.querySelector('.btn-unpin')?.addEventListener('click',e=>{
+        e.stopPropagation();
+        togglePin(entry.discord_id,false);
+      });
+    } else {
+      card.querySelector('.btn-pin')?.addEventListener('click',e=>{
+        e.stopPropagation();
+        togglePin(entry.discord_id,true);
+      });
+    }
   }
-  if(isPriv){card.querySelector('.btn-delete').addEventListener('click',e=>{e.stopPropagation();sfx.error();deleteEntry(entry.discord_id);});card.addEventListener('contextmenu',e=>{e.preventDefault();openCtxMenu(e,entry);});}
+
+  // PRIV ACTIONS (EDIT + DELETE + MENU)
+  if(isPriv){
+
+    // EDIT
+    card.querySelector('.btn-edit')?.addEventListener('click', e=>{
+      e.stopPropagation();
+      sfx.open();
+      openEditModal(entry);
+    });
+
+    // DELETE
+    card.querySelector('.btn-delete').addEventListener('click',e=>{
+      e.stopPropagation();
+      sfx.error();
+      deleteEntry(entry.discord_id);
+    });
+
+    // CONTEXT MENU
+    card.addEventListener('contextmenu',e=>{
+      e.preventDefault();
+      openCtxMenu(e,entry);
+    });
+  }
+
+  // HOVER
   card.addEventListener('mouseenter',()=>sfx.hover());
+
   return card;
 }
 
@@ -1888,7 +2088,7 @@ async function addSocial(){
 async function deleteSocial(id){if(!confirm('Supprimer ce lien ?'))return;try{const {error}=await db_client.from('socials').delete().eq('id',id);if(error)throw error;sfx.error();await loadSocials();renderSocials();}catch(e){sfx.error();alert('Erreur: '+e.message);}}
 
 // ═══════════════════════════════════════════════
-// BADGE CONFIG (dossier cards)
+// BADGE CONFIG
 // ═══════════════════════════════════════════════
 const cbadgeIcons={vip:'👑',danger:'⚠️',trusted:'✓',hacker:'◈',bot:'◆'};
 const allCBadges=['vip','danger','trusted','hacker','bot'];
@@ -1923,11 +2123,9 @@ async function saveBadges(){if(!ctxEntry)return;const active=allCBadges.filter(b
 // HALL OF FAME / CLOWN
 // ════════════════════════════════════════════════
 let db_hall=[];
-
 async function loadHall(){
-  try{const {data,error}=await db_client.from('hall').select('*').order('created_at',{ascending:false});if(error)throw error;db_hall=data||[];}catch(e){db_hall=[];console.warn('[hall] Load failed. Create table: hall(id uuid primary key default gen_random_uuid(), type text, title text, text text, img_url text, author text, created_at timestamptz default now()). Error:',e.message);}
+  try{const {data,error}=await db_client.from('hall').select('*').order('created_at',{ascending:false});if(error)throw error;db_hall=data||[];}catch(e){db_hall=[];}
 }
-
 function hallTab(tab){
   sfx.nav();
   document.querySelectorAll('.hall-tab-btn').forEach(b=>b.classList.remove('active'));
@@ -1935,14 +2133,12 @@ function hallTab(tab){
   document.getElementById('htab-'+tab).classList.add('active');
   document.getElementById('hall-'+tab+'-section').classList.add('active');
 }
-
 function previewHallImg(type){
   const val=document.getElementById(type+'-img').value.trim();
   const preview=document.getElementById(type+'-img-preview');
   if(val&&val.startsWith('http')){preview.src=val;preview.classList.add('visible');preview.onerror=()=>preview.classList.remove('visible');}
   else{preview.src='';preview.classList.remove('visible');}
 }
-
 async function addHallEntry(type){
   const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
   if(!isPriv){sfx.error();return;}
@@ -1956,36 +2152,24 @@ async function addHallEntry(type){
   try{
     const {data,error}=await db_client.from('hall').insert([{type,title,text:text||null,img_url:imgUrl||null,author:session.username}]).select().single();
     if(error)throw error;
-    db_hall.unshift(data);
-    sfx.save();showMsg(msgId,'success','✓ Ajouté au Hall !');
+    db_hall.unshift(data);sfx.save();showMsg(msgId,'success','✓ Ajouté au Hall !');
     document.getElementById(type+'-title').value='';document.getElementById(type+'-img').value='';document.getElementById(type+'-text').value='';document.getElementById(type+'-img-preview').classList.remove('visible');
     renderHall();
-  }catch(err){
-    sfx.error();
-    const hint=err.message&&err.message.includes('does not exist')?'Table "hall" introuvable — crée-la dans Supabase (id uuid, type text, title text, text text, img_url text, author text, created_at timestamptz).':'Erreur: '+err.message;
-    showMsg(msgId,'error',hint);
-  }
+  }catch(err){sfx.error();showMsg(msgId,'error','Erreur: '+err.message);}
   btn.disabled=false;btn.textContent=type==='fame'?'🏆 AJOUTER AU HALL OF FAME':'🤡 AJOUTER AU HALL OF CLOWN';
 }
-
 function renderHall(){
   const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
-  // Show add panels for admins
   document.getElementById('hall-fame-add-panel').style.display=isPriv?'':'none';
   document.getElementById('hall-clown-add-panel').style.display=isPriv?'':'none';
-
   renderHallSection('fame');
   renderHallSection('clown');
 }
-
 function renderHallSection(type){
   const items=db_hall.filter(h=>h.type===type);
   const grid=document.getElementById(type+'-grid');
   const isFame=type==='fame';
-  if(!items.length){
-    grid.innerHTML=`<div class="empty-state" style="opacity:.35;grid-column:1/-1;"><span class="empty-icon">${isFame?'🏆':'🤡'}</span><div class="empty-title" style="color:${isFame?'var(--gold)':'var(--clown)'};">HALL VIDE</div><div class="empty-sub">Aucune entrée pour l'instant</div></div>`;
-    return;
-  }
+  if(!items.length){grid.innerHTML=`<div class="empty-state" style="opacity:.35;grid-column:1/-1;"><span class="empty-icon">${isFame?'🏆':'🤡'}</span><div class="empty-title" style="color:${isFame?'var(--gold)':'var(--clown)'};">HALL VIDE</div><div class="empty-sub">Aucune entrée pour l'instant</div></div>`;return;}
   grid.innerHTML='';
   const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
   items.forEach((item,i)=>{
@@ -2000,25 +2184,21 @@ function renderHallSection(type){
       <div class="hall-card-rank ${isFame?'fame-rank':'clown-rank'}">#${String(i+1).padStart(2,'0')}</div>
       <div class="hall-card-title ${isFame?'fame-title':'clown-title'}">${escapeHtml(item.title)}</div>
       <div class="hall-card-author ${isFame?'fame-author':'clown-author'}">PAR ${escapeHtml(item.author)}</div>
-      ${imgHtml}
-      ${textHtml}
+      ${imgHtml}${textHtml}
       <div class="hall-card-footer">
         <div class="hall-card-date">${new Date(item.created_at).toLocaleDateString('fr-FR')}</div>
         ${deleteBtn}
-      </div>
-    `;
+      </div>`;
     grid.appendChild(card);
   });
 }
-
 async function deleteHallEntry(id){
   if(!confirm('Supprimer cette entrée du Hall ?'))return;
   try{const {error}=await db_client.from('hall').delete().eq('id',id);if(error)throw error;db_hall=db_hall.filter(h=>h.id!==id);sfx.error();renderHall();}catch(e){sfx.error();alert('Erreur: '+e.message);}
 }
 
 // ════════════════════════════════════════════════
-// REAL-TIME CHAT
-// Table: chat_messages(id uuid primary key default gen_random_uuid(), author text, text text, img_url text, created_at timestamptz default now())
+// CHAT
 // ════════════════════════════════════════════════
 let db_chat=[];
 let pendingChatImg=null;
@@ -2030,12 +2210,8 @@ async function loadChatMessages(){
     if(error)throw error;
     db_chat=data||[];
     renderChatMessages();
-  }catch(e){
-    db_chat=[];
-    console.warn('[chat] Load failed. Create table: chat_messages(id uuid primary key default gen_random_uuid(), author text, text text, img_url text, created_at timestamptz default now()). Error:',e.message);
-  }
+  }catch(e){db_chat=[];}
 }
-
 function renderChatMessages(){
   const container=document.getElementById('chat-messages');
   const empty=document.getElementById('chat-empty');
@@ -2046,14 +2222,11 @@ function renderChatMessages(){
   let lastDate='';
   db_chat.forEach(msg=>{
     const msgDate=new Date(msg.created_at).toLocaleDateString('fr-FR');
-    if(msgDate!==lastDate){
-      const sep=document.createElement('div');sep.className='chat-day-separator';sep.textContent=msgDate;container.appendChild(sep);lastDate=msgDate;
-    }
+    if(msgDate!==lastDate){const sep=document.createElement('div');sep.className='chat-day-separator';sep.textContent=msgDate;container.appendChild(sep);lastDate=msgDate;}
     container.appendChild(buildChatMsg(msg));
   });
   scrollChatToBottom();
 }
-
 function buildChatMsg(msg){
   const isOwn=session&&msg.author===session.username;
   const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
@@ -2075,37 +2248,22 @@ function buildChatMsg(msg){
         ${msg.text?escapeHtml(msg.text):''}
         ${imgHtml}
       </div>
-    </div>
-  `;
+    </div>`;
   return wrapper;
 }
-
-function scrollChatToBottom(){
-  const container=document.getElementById('chat-messages');
-  if(container)setTimeout(()=>{container.scrollTop=container.scrollHeight;},50);
-}
-
-function toggleChatImgInput(){
-  const row=document.getElementById('chat-img-url-row');
-  row.classList.toggle('visible');
-  if(row.classList.contains('visible'))document.getElementById('chat-img-url-field').focus();
-  sfx.type();
-}
-
+function scrollChatToBottom(){const container=document.getElementById('chat-messages');if(container)setTimeout(()=>{container.scrollTop=container.scrollHeight;},50);}
+function toggleChatImgInput(){const row=document.getElementById('chat-img-url-row');row.classList.toggle('visible');if(row.classList.contains('visible'))document.getElementById('chat-img-url-field').focus();sfx.type();}
 function confirmChatImg(){
   const val=document.getElementById('chat-img-url-field').value.trim();
   if(!val||!val.startsWith('http')){sfx.error();return;}
   pendingChatImg=val;
   document.getElementById('chat-img-url-field').value='';
   document.getElementById('chat-img-url-row').classList.remove('visible');
-  // Show preview
   const bar=document.getElementById('chat-img-preview-bar');
   const wrapper=document.createElement('div');wrapper.className='chat-img-pending';
-  wrapper.innerHTML=`<img src="${escapeHtml(val)}" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23222%22/><text x=%2250%22 y=%2262%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22%234a9eff%22>🖼</text></svg>'"><button class="chat-img-pending-remove" onclick="cancelChatImg()">✕</button>`;
-  bar.innerHTML='';bar.appendChild(wrapper);
-  sfx.success();
+  wrapper.innerHTML=`<img src="${escapeHtml(val)}" alt=""><button class="chat-img-pending-remove" onclick="cancelChatImg()">✕</button>`;
+  bar.innerHTML='';bar.appendChild(wrapper);sfx.success();
 }
-
 function cancelChatImg(){
   pendingChatImg=null;
   document.getElementById('chat-img-preview-bar').innerHTML='';
@@ -2113,35 +2271,22 @@ function cancelChatImg(){
   document.getElementById('chat-img-url-field').value='';
   sfx.close();
 }
-
 function autoResizeChat(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
-
-function chatKeydown(e){
-  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}
-}
-
+function chatKeydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}}
 async function sendChatMessage(){
   const input=document.getElementById('chat-input');
   const text=input.value.trim();
   const imgUrl=pendingChatImg;
   if(!text&&!imgUrl){sfx.error();return;}
-  const btn=document.getElementById('btn-chat-send');
-  btn.disabled=true;
+  const btn=document.getElementById('btn-chat-send');btn.disabled=true;
   try{
     const {data,error}=await db_client.from('chat_messages').insert([{author:session.username,text:text||null,img_url:imgUrl||null}]).select().single();
     if(error)throw error;
-    input.value='';input.style.height='auto';
-    cancelChatImg();
-    // Realtime will add it, but add locally for instant feedback
+    input.value='';input.style.height='auto';cancelChatImg();
     if(!db_chat.find(m=>m.id===data.id)){db_chat.push(data);renderChatMessages();}
-  }catch(e){
-    sfx.error();
-    const hint=e.message&&e.message.includes('does not exist')?'Table "chat_messages" introuvable — crée-la dans Supabase.':e.message;
-    showToast('⚠ Chat error: '+hint);
-  }
+  }catch(e){sfx.error();showToast('⚠ Chat error: '+e.message);}
   btn.disabled=false;
 }
-
 async function deleteChatMsg(id){
   const isPriv=session&&(session.role==='owner'||session.role==='co-owner'||session.role==='admin');
   const msg=db_chat.find(m=>m.id===id);
@@ -2150,17 +2295,58 @@ async function deleteChatMsg(id){
   try{
     const {error}=await db_client.from('chat_messages').delete().eq('id',id);
     if(error)throw error;
-    db_chat=db_chat.filter(m=>m.id!==id);
-    sfx.close();
-    renderChatMessages();
+    db_chat=db_chat.filter(m=>m.id!==id);sfx.close();renderChatMessages();
   }catch(e){sfx.error();alert('Erreur: '+e.message);}
 }
-
 function showToast(msg){
   const t=document.createElement('div');
   t.style.cssText='position:fixed;bottom:20px;right:20px;z-index:9999;padding:12px 18px;background:rgba(204,17,34,0.15);border:1px solid rgba(204,17,34,0.4);border-radius:2px;font-family:Share Tech Mono,monospace;font-size:11px;color:#ff3344;animation:fadeIn .3s ease;';
   t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),4000);
 }
+
+// ═══════════════════════════════════════════════
+// EDIT MODAL
+// ═══════════════════════════════════════════════
+function openEditModal(entry){
+  document.getElementById('edit-discord-id').textContent=entry.discord_id;
+  document.getElementById('edit-username').textContent=entry.username;
+  document.getElementById('edit-prenom').value=entry.prenom||'';
+  document.getElementById('edit-nom').value=entry.nom||'';
+  document.getElementById('edit-ddn').value=entry.ddn||'';
+  document.getElementById('edit-ville').value=entry.ville||'';
+  document.getElementById('edit-adresse').value=entry.adresse||'';
+  document.getElementById('edit-email').value=entry.email||'';
+  document.getElementById('edit-tel').value=entry.tel||'';
+  document.getElementById('edit-ip').value=entry.ip||'';
+  document.getElementById('edit-servers').value=entry.servers||'';
+  document.getElementById('edit-notes').value=entry.notes||'';
+  document.getElementById('edit-modal').dataset.id=entry.discord_id;
+  document.getElementById('edit-modal').classList.add('open');
+}
+async function saveEdit(){
+  const modal=document.getElementById('edit-modal');
+  const discord_id=modal.dataset.id;
+  const updated={
+    prenom:  document.getElementById('edit-prenom').value.trim(),
+    nom:     document.getElementById('edit-nom').value.trim(),
+    ddn:     document.getElementById('edit-ddn').value||null,
+    ville:   document.getElementById('edit-ville').value.trim(),
+    adresse: document.getElementById('edit-adresse').value.trim(),
+    email:   document.getElementById('edit-email').value.trim(),
+    tel:     document.getElementById('edit-tel').value.trim(),
+    ip:      document.getElementById('edit-ip').value.trim(),
+    servers: document.getElementById('edit-servers').value.trim(),
+    notes:   document.getElementById('edit-notes').value.trim(),
+  };
+  try{
+    const {error}=await db_client.from('entries').update(updated).eq('discord_id',discord_id);
+    if(error)throw error;
+    const idx=db_entries.findIndex(e=>e.discord_id===discord_id);
+    if(idx>-1)db_entries[idx]={...db_entries[idx],...updated};
+    sfx.save();closeEditModal();renderGrid();
+  }catch(err){sfx.error();alert('Erreur: '+err.message);}
+}
+function closeEditModal(){sfx.close();document.getElementById('edit-modal').classList.remove('open');}
 
 // ═══════════════════════════════════════════════
 // REALTIME
@@ -2233,13 +2419,39 @@ function discordSkip(){document.getElementById('discord-join-modal').style.displ
 // BOOT
 // ═══════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded',()=>{
-  setTimeout(()=>{
-    initApp().then(()=>{
-      // Uncomment to show Discord invite modal on first visit:
-      // if(!localStorage.getItem('discord_joined')){document.getElementById('discord-join-modal').style.display='flex';}
-    });
-  },2200);
+  setTimeout(()=>{ initApp(); },2200);
 });
 </script>
+
+<!-- EDIT MODAL -->
+<div class="sub-modal" id="edit-modal" onclick="if(event.target===this)closeEditModal()">
+  <div class="sub-modal-box" style="max-width:620px;width:90%;max-height:85vh;overflow-y:auto;">
+    <div class="sub-modal-title">MODIFIER LE DOSSIER</div>
+    <div class="sub-modal-sub"><span id="edit-username"></span> — <span id="edit-discord-id"></span></div>
+    <div class="input-row" style="margin-bottom:10px;">
+      <div class="input-group"><label class="input-label">PRÉNOM</label><input type="text" class="form-input" id="edit-prenom"></div>
+      <div class="input-group"><label class="input-label">NOM</label><input type="text" class="form-input" id="edit-nom"></div>
+    </div>
+    <div class="input-row" style="margin-bottom:10px;">
+      <div class="input-group"><label class="input-label">DATE DE NAISSANCE</label><input type="date" class="form-input" id="edit-ddn"></div>
+      <div class="input-group"><label class="input-label">VILLE</label><input type="text" class="form-input" id="edit-ville"></div>
+    </div>
+    <div class="input-group" style="margin-bottom:10px;"><label class="input-label">ADRESSE</label><input type="text" class="form-input" id="edit-adresse"></div>
+    <div class="input-row" style="margin-bottom:10px;">
+      <div class="input-group"><label class="input-label">EMAIL</label><input type="text" class="form-input" id="edit-email"></div>
+      <div class="input-group"><label class="input-label">TÉLÉPHONE</label><input type="text" class="form-input" id="edit-tel"></div>
+    </div>
+    <div class="input-row" style="margin-bottom:10px;">
+      <div class="input-group"><label class="input-label">IP / VPN</label><input type="text" class="form-input" id="edit-ip"></div>
+      <div class="input-group"><label class="input-label">SERVEURS DISCORD</label><input type="text" class="form-input" id="edit-servers"></div>
+    </div>
+    <div class="input-group" style="margin-bottom:10px;"><label class="input-label">NOTES</label><textarea class="form-input" id="edit-notes" rows="3" style="resize:vertical;"></textarea></div>
+    <div class="sub-modal-actions">
+      <button class="btn-sm btn-sm-cancel" onclick="closeEditModal()">ANNULER</button>
+      <button class="btn-sm btn-sm-save" onclick="saveEdit()">◆ SAUVEGARDER</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
